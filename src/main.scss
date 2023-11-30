@@ -1,0 +1,44 @@
+@forward "scss/theme";
+
+@use 'scss/mixins';
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+
+body {
+  --offset: 156px;
+  --columns: 12;
+
+  display: grid;
+  grid-template-columns: var(--offset) repeat(var(--columns), 1fr) var(--offset);
+  grid-auto-rows: min-content;
+  grid-auto-flow: row;
+  column-gap: 24px;
+
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+
+  & > * {
+    --_column: var(--column, 2/-2);
+
+    grid-column: var(--_column);
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+}
+
+
+.hero-section {
+  height: 100dvh;
+  background: red;
+
+  &-wrapper {
+    background: blue;
+  }
+}
+
+
+
