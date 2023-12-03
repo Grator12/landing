@@ -452,11 +452,16 @@ body > * {
 }
 
 .hero-section {
+  --column: 1/-1;
   height: 100dvh;
-  background: red;
+  background: url("https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1702252800&Signature=CiF0uw7JVYVY3L940L01dueprApPGqIGaX3Bhq2yk-efS5DyinVGzjPJuoWmLkI3uSETp8Z-ywqRysNpOOKD9JpZVqRlbgtxHxAR7bWo0ocOhvU1JrqDxVSRMNAGjKynFVvoLQQ5Wwjq2xuQiGvHSRII2Wa8z6OMkpkLeNHYUc1J-sgarGT6SqfnxhwiiXR1GdV6OOOPzJRp9x9sxaM0CzxXffEUAb7Eh6BTs-zLwgfFCiFT~AIbr4CZqJ~KIoHbKZIYJQOPU1MYftN2A0co2zk~7zEboLg~~2cOt7OHMaI-1pq9p8FPfeetSsukfoLjqNx98q8V5yU6B6-1YZcQ8A__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
+  background-size: cover;
+  background-position: center;
 }
 .hero-section-wrapper {
-  background: blue;
+  grid-column: 2/8;
+  display: grid;
+  grid-template-columns: subgrid;
 }
 
 /*# sourceMappingURL=main.css.map */
