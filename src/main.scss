@@ -33,7 +33,7 @@ body {
   grid-auto-flow: row;
   column-gap: var(--spacing);
 
-  background-color: var(--md-sys-color-background);
+
   color: var(--md-sys-color-on-background);
 
 
@@ -65,7 +65,7 @@ body {
   grid-template-columns: subgrid;
   grid-column: 1/-1;
   padding: 24px 156px;
-  background: transparent;
+  background-color:var(--md-sys-color-on-primary);
   &__logo{
     color:var(--md-sys-color-on-primary);
     grid-column: 2/4;
@@ -118,11 +118,47 @@ body {
   }
 }
 .section{
+  display: grid;
   grid-column: content;
+  grid-template-columns: subgrid;
   &--wide{
     grid-column: container;
-    display: grid;
-    grid-template-columns: subgrid;
+
+  }
+}
+.section-one{
+  padding: 100px 156px;
+  grid-column: content;
+  height: 412px;
+  &__wrapper{
+    display: flex;
+    flex-direction: row;
+    gap:120px;
+    align-items: center;
+    justify-content: center;
+
+  }
+  &__item{
+  background: url("https://s3-alpha-sig.figma.com/img/64af/9ae6/66d8a601f727fc4ad3e565f793de4b8d?Expires=1702857600&Signature=o8Ws4nDFzyeLVXIVDoRGCtC2k3S6O-6ohyNM7R1LXRLYjvRVMej4zNj8CqRJ~mTa56oxKqMVpE2kmoevpwhmbLmxLncqPxw7~2dgBGZBA8iefCzv~9lQroUgQ36cA7sCd~nrYZXnYmelJw6B2KBO1dcz8dgxBI1hgtSNFIRg097ixmP9m~PKXvIo-yiDfyd9doD9EgemFFxoh1oWzOVDMwtcNxp0H4KcCaHHfZQ4TR71fczlT4Va~b1-zkvtkI0uTRk7P3WmNaYVEZ1Z5~YteVHZOhibUqdLIj0fqddVevNpOA7h6fxtbIz~BSp3-k1xx72Ba-MxqkHdKyvanU8ecg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4");
+    background-size:cover ;
+    grid-column: 1/calc(var(--columns)/2 - 1);
+    border-radius: 16px;
+    // Если уменьшаем - переносим наверх
+  }
+  &__item-two{
+    grid-column: calc(var(--columns)/2 + 1)/var(--columns);
+    &__header{
+      margin: 0;
+      color:var(--md-sys-color-primary)
+    }
+    &__sup-text{
+      color:var(--md-sys-color-on-surface)
+    }
+    &__wrapepr{
+      display: flex;
+      flex-direction: column;
+      gap:16px
+    }
   }
 }
 .button{
