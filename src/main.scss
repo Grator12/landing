@@ -81,6 +81,9 @@ body {
   margin: 0;
   color:var(--md-sys-color-primary);
   @include mixins.headline-medium;
+  @media(max-width: $breakpoint-expanded) {
+    text-align: center;
+  }
   &__logo{
     color:var(--md-sys-color-on-primary);
     grid-column: 2/4;
@@ -154,10 +157,15 @@ body {
     grid-column: content;
     grid-template-columns: subgrid;
     row-gap: 50px;
-
+    @media(max-width: $breakpoint-expanded) {
+      row-gap: 0;
+    }
     &__inner {
       display: grid;
       grid-column: span 6;
+      @media(max-width: $breakpoint-expanded) {
+        grid-column: 1/-1;
+      }
       &--picture {
         grid-template-columns: subgrid;
         .picture {
@@ -176,6 +184,9 @@ body {
     grid-column: container;
     background-color: var(--md-sys-color-secondary-container);
     color:var(--md-sys-color-on-secondary-container);
+    @media(max-width: $breakpoint-expanded) {
+      padding: 16px 0;
+    }
   }
   &--secondary{
     background-color:var( --md-sys-color-primary-container);
@@ -190,6 +201,10 @@ body {
   display: grid;
   grid-template-columns: subgrid;
   grid-column: span 6;
+  @media(max-width: $breakpoint-expanded) {
+    grid-column: 1/-1;
+    grid-row:1;
+  }
  }
 
 .section-one{
@@ -209,14 +224,23 @@ body {
 
   }
   &__item{
-      grid-column: 1/-1;
-    // Если уменьшаем - переносим наверх
-  }
-  &__item-two{
+    grid-column: span 6;
     @media(max-width: $breakpoint-expanded) {
-      grid-row: 2;
-      grid-column:1/-1;
+      grid-column: 1/-1;
     }
+    // Если уменьшаем - переносим наверх
+      &--picture {
+        grid-template-columns: subgrid;
+        .picture {
+          grid-column: span 5;
+          @media(max-width: $breakpoint-expanded) {
+            grid-column: 1/-1;
+          }
+        }
+      }
+    }
+
+
     &__header{
 
     }
@@ -229,37 +253,13 @@ body {
     //  gap:16px
     //}
   }
-}
+
 
 .sup-text{
   color:var(--md-sys-color-on-surface);
   @include mixins.body-large;
 }
 
-//.text--end{
-//  @media(min-width: $breakpoint-expanded) {
-//    grid-column: calc(var(--columns) / 2 + 1)/calc(var(--columns) + 1);
-//  }
-//
-//}
-//.picture--end{
-//  @media(min-width: $breakpoint-expanded) {
-//    grid-column: calc(var(--columns)/2 + 2)/calc(var(--columns) + 1);
-//  }
-//
-//}
-//.text--start{
-//  @media(min-width: $breakpoint-expanded) {
-//    grid-column: 1/calc(var(--columns)/2 + 1 );
-//  }
-//
-//}
-//.picture--start{
-//  @media(min-width: $breakpoint-expanded) {
-//    grid-column: 1/calc(var(--columns)/2  );
-//  }
-//
-//}
 .picture{
 
 
@@ -305,6 +305,7 @@ body {
   @include mixins.display-medium;
   display: grid;
   place-content: center;
+  text-align: center;
 }
 .section-middle2{
   padding: 64px 0;
@@ -341,7 +342,7 @@ body {
   @include mixins.body-medium;
    color:var(--md-sys-light-on-surface);
   &__wrapper{
-    grid-column: 9/12;
+    grid-column: calc(-1 * (var(--columns) / 2 + 1 ) )/-1;
   }
 }
 
