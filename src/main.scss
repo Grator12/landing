@@ -12,13 +12,14 @@ html, body {
 $spacing-min: 16px;
 $spacing-max: 32px;
 $offset-max: 200px;
-$breakpoint-content: 1128px;
-$content-column-size: math.div($breakpoint-content - 11 * $spacing-max, 12);
+$max-content: 1133px; // 1440 - 156 * 2
+$content-column-size: math.div($max-content - 11 * $spacing-max, 12);
 
-$breakpoint-medium: 600px;
-$breakpoint-expanded: 800px;
+$breakpoint-medium:500px;
+$breakpoint-expanded: 960px;
 
-$breakpoint-content-min: $breakpoint-content + $spacing-max * 2;
+
+$breakpoint-content-min: $max-content + $spacing-max * 2;
 $breakpoint-content-max: $breakpoint-content-min + $offset-max * 2;
 // после  offset-max растет content
 .main-wrapper{
@@ -29,26 +30,23 @@ $breakpoint-content-max: $breakpoint-content-min + $offset-max * 2;
   grid-auto-flow: row;
   @include mixins.body-medium;
   column-gap: var(--spacing);
- min-width: 600px;
+  min-width: 360px;
 }
 body {
   --offset: 0;
   --columns: 4;
   --spacing: #{$spacing-min};
   --column-size: 1fr;
-  --hero-text-column:span 2;
 
 
   color: var(--md-sys-color-on-background);
   @media(min-width: $breakpoint-medium) {
     --columns: 8;
     --spacing: #{$spacing-max};
-    --hero-text-column:2/4;
   }
 
   @media(min-width: $breakpoint-expanded) {
     --columns: 12;
-    --hero-text-column:2/8;
     --header-list-direction:row;
     .header__list {
       &__wrapper {
@@ -81,14 +79,15 @@ body {
   margin: 0;
   color:var(--md-sys-color-primary);
   @include mixins.headline-medium;
-  @media(max-width: $breakpoint-expanded) {
-    text-align: center;
-  }
+  //@media(max-width: $breakpoint-expanded) {
+  //  text-align: center;
+  //}
   &__logo{
     color:var(--md-sys-color-on-primary);
-    grid-column: 2/4;
+    grid-column:span 2;
     svg{
       width: 100%;
+      height: auto;
     }
   }
   &__list{
@@ -120,15 +119,30 @@ body {
   height: 100dvh;
   background: url('https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1702252800&Signature=CiF0uw7JVYVY3L940L01dueprApPGqIGaX3Bhq2yk-efS5DyinVGzjPJuoWmLkI3uSETp8Z-ywqRysNpOOKD9JpZVqRlbgtxHxAR7bWo0ocOhvU1JrqDxVSRMNAGjKynFVvoLQQ5Wwjq2xuQiGvHSRII2Wa8z6OMkpkLeNHYUc1J-sgarGT6SqfnxhwiiXR1GdV6OOOPzJRp9x9sxaM0CzxXffEUAb7Eh6BTs-zLwgfFCiFT~AIbr4CZqJ~KIoHbKZIYJQOPU1MYftN2A0co2zk~7zEboLg~~2cOt7OHMaI-1pq9p8FPfeetSsukfoLjqNx98q8V5yU6B6-1YZcQ8A__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4');
   background-size: cover;
-  background-position: center;
+  background-position: right;
   grid-column: container;
   grid-template-columns: subgrid;
+
+  &__wrapper{
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: content;
+  }
   &__info{
-    grid-column: 1/-1;
+    grid-column: span 6;
     display: flex;
     flex-direction: column;
     gap: 128px;
     color: var(--md-sys-color-on-primary);
+    &__button{
+      grid-column: 1/-1;
+    }
+    @media(max-width: $breakpoint-expanded) {
+      grid-column: span 8;
+    }
+    @media(max-width: $breakpoint-medium) {
+      grid-column: span 4;
+    }
     &__head{
       &__title{
         margin: 0;
@@ -139,13 +153,19 @@ body {
         @include mixins.headline-large;
       }
     }
+    &__wrapper{
+      grid-column: 1/-1;
+      display: grid;
+      grid-template-columns: subgrid;
+      @media(max-width: $breakpoint-expanded) {
+        grid-column: 2/6;
+      }
+      @media(max-width: $breakpoint-medium) {
+        grid-column: 1/-1;
+      }
+    }
+  }
 
-  }
-  &__wrapper{
-    grid-column: var(--hero-text-column);
-    display: grid;
-    grid-template-columns: subgrid;
-  }
 }
 .section{
   display: grid;
@@ -177,6 +197,11 @@ body {
 
   &--wide{
     grid-column: container;
+    &_button{
+      @media(max-width: $breakpoint-medium) {
+        padding: var(--spacing);
+      }
+    }
   }
 
   &--big{
@@ -197,6 +222,7 @@ body {
 
   }
 }
+
 .picture-wrapper {
   display: grid;
   grid-template-columns: subgrid;
@@ -205,8 +231,7 @@ body {
     grid-column: 1/-1;
     grid-row:1;
   }
- }
-
+}
 .section-one{
   grid-column: content;
   padding: 32px 0;
@@ -261,8 +286,6 @@ body {
 }
 
 .picture{
-
-
   border-radius: 16px;
   height: 100%;
   width: 100%;
@@ -328,14 +351,37 @@ body {
   }
 }
 .button{
+  position: relative;
   display: flex;
   padding: 24px 64px;
   align-items: center;
   justify-content: center;
   border-radius: 16px;
-  min-width: 560px;
-  background: var(--md-sys-color-inverse-primary);
+  text-align: center;
+  background: var(--md-sys-color-primary);
+  color:var(--md-sys-color-on-primary);
+  isolation: isolate;
   @include mixins.display-medium;
+  &:hover {
+    --state-layer-opacity: 0.08;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--md-sys-color-on-primary);
+    opacity: var(--state-layer-opacity, 0);
+    transition: opacity 0.3s;
+    z-index: -1;
+    border-radius:16px;
+  }
+  @media(min-width: $breakpoint-medium) {
+    white-space: nowrap;
+  }
+  &--padding{
+
+  }
+
 }
 
 .end-text{
